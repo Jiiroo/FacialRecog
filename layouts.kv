@@ -1,0 +1,887 @@
+#:import AKBottomNavigation akivymd.uix.bottomnavigation
+#:import MDFloatingActionButton kivymd.uix.button.MDFloatingActionButton
+
+<SplashScreen>
+    name: 'splash'
+
+    FloatLayout:
+        FitImage:
+            source: 'assets/Splash.png'
+
+        MDRoundFlatButton:
+            text: '[color=#89ABE3FF][b]SIGN IN[/b][/color]'
+            markup: True
+            theme_text_color: 'Custom'
+            text_color: 1,1 ,1 ,1
+            md_bg_color: 1, 1, 1, 1
+            size_hint: .5, None
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            on_release: app.go_to_login()
+
+        MDRoundFlatButton:
+            text: '[color=#FFFFFF][b]SIGN UP[/b][/color]'
+            markup: True
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            size_hint: .5, None
+            pos_hint: {'center_x': .5, 'center_y': .4}
+            on_release: app.go_to_setup()
+
+
+<LoginWindow>
+    name: 'login'
+    reg_user: reg_user
+    reg_password: reg_password
+
+    FloatLayout:
+        FitImage:
+            source: 'assets/login.png'
+
+        MDTextField:
+            id: reg_user
+            hint_text: 'Username'
+            icon_right: 'account-circle-outline'
+            icon_right_color:  0.53333, 0.67058, 0.89019, 1
+            size_hint: .6, .1
+            pos_hint: {'center_x': .53, 'center_y': .38}
+
+        MDTextField:
+            id: reg_password
+            hint_text: 'Password'
+            multiline: False
+            write_tab: False
+            password: True
+            size_hint: .6, .1
+            icon_right: 'lock-outline'
+            icon_right_color:  0.53333, 0.67058, 0.89019, 1
+            pos_hint: {'center_x': .53, 'center_y': .28}
+
+        MDFillRoundFlatButton:
+            text:'[color=#FFFFFF][b]Log In[/b][/color]'
+            markup: True
+            size_hint: .6, None
+            md_bg_color: 0.53333, 0.67058, 0.89019, 1
+            pos_hint: {'center_x': .53, 'center_y': .18}
+            on_release: root.login()
+
+        MDTextButton:
+            text: '[color=#A9A9A9][b]Create an Account[/b][/color]'
+            markup: True
+            pos_hint: {'center_x': .53, 'center_y': .1}
+            on_release: app.go_to_setup()
+
+
+<SetupWindow>
+    name: 'setup'
+    user: user
+    password_1: password_1
+    password_2: password_2
+
+    FloatLayout:
+        FitImage:
+            source: 'assets/setup.png'
+
+        MDIconButton:
+            icon: 'arrow-left'
+            user_font_size: '50sp'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_y': .95}
+            on_release: root.back_setup()
+
+        MDTextField:
+            id: user
+            mode: 'rectangle'
+            hint_text: 'Username'
+            icon_right: 'account-circle'
+            multiline: False
+            write_tab: False
+            icon_right_color:  0.53333, 0.67058, 0.89019, 1
+            size_hint: .6, None
+            color_mode: 'custom'
+            line_color_focus:  0.53333, 0.67058, 0.89019, 1
+            pos_hint: {'center_x': .5, 'center_y': .45}
+
+        MDTextField:
+            id: password_1
+            mode: 'rectangle'
+            hint_text: 'Password'
+            multiline: False
+            write_tab: False
+            icon_right: 'account-lock-outline'
+            icon_right_color:  0.53333, 0.67058, 0.89019, 1
+            size_hint: .6, None
+            color_mode: 'custom'
+            line_color_focus:  0.53333, 0.67058, 0.89019, 1
+            pos_hint: {'center_x': .5, 'center_y': .33}
+
+        MDTextField:
+            id: password_2
+            mode: 'rectangle'
+            hint_text: 'Confirm Password'
+            icon_right: 'account-lock'
+            multiline: False
+            write_tab: False
+            icon_right_color:  0.53333, 0.67058, 0.89019, 1
+            size_hint: .6, None
+            password: True
+            color_mode: 'custom'
+            line_color_focus:  0.53333, 0.67058, 0.89019, 1
+            pos_hint: {'center_x': .5, 'center_y': .21}
+
+        MDFillRoundFlatIconButton:
+            icon: 'content-save'
+            text: '[color=#FFFFFF][b]                   DONE[/b][/color]'
+            markup: True
+            size_hint: .6, None
+            md_bg_color:  0.53333, 0.67058, 0.89019, 1
+            pos_hint: {'center_x': .5, 'center_y': .1}
+            on_release: root.setup()
+
+
+<Navigation>
+    ScreenManager:
+        id: sm
+        Lobby:
+        About:
+
+    AKBottomNavigation:
+        items: root.bottomnavigation_items
+
+<Lobby>
+    name: 'lobby'
+
+    FloatLayout:
+        FitImage:
+            source: 'assets/lobby.png'
+
+        MDLabel:
+            text: 'Lobby'
+            font_style: 'H4'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            font_name: 'fonts/maeb.otf'
+            pos_hint: {'center_x': .55, 'center_y': .95}
+
+        MDIconButton:
+            icon: 'logout'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            user_font_size: '25sp'
+            pos_hint: {'center_x': .9, 'center_y': .95}
+            on_release: root.logout()
+
+        MDCard:
+            orientation: 'vertical'
+            size_hint: .3, .25
+            radius: [36,]
+            border_radius: 30
+            pos: 50, 350
+            padding: dp(13)
+            MDIconButton:
+                icon: 'assets/register_student.png'
+                user_font_size: '64sp'
+                pos_hint: {'center_y': .6}
+                on_release: root.add_students()
+
+            MDSeparator:
+
+            MDLabel:
+                text: '[color=#89ABE3FF][b]Register Student[/b][/color]'
+                markup: True
+                halign: 'center'
+
+        MDCard:
+            orientation: 'vertical'
+            size_hint: .3, .25
+            radius: [36,]
+            border_radius: 30
+            pos: 210, 350
+            padding: dp(13)
+            MDIconButton:
+                icon: 'assets/attendance.png'
+                user_font_size: '64sp'
+                pos_hint: {'center_y': .6}
+                on_release: root.attendance()
+
+            MDSeparator:
+
+            MDLabel:
+                text: '[color=#89ABE3FF][b]Attendance[/b][/color]'
+                markup: True
+                halign: 'center'
+
+        MDCard:
+            orientation: 'vertical'
+            size_hint: .3, .25
+            radius: [36,]
+            border_radius: 30
+            pos: 50, 150
+            padding: dp(13)
+            MDIconButton:
+                icon: 'assets/studentlist.png'
+                user_font_size: '64sp'
+                pos_hint: {'center_y': .6}
+                on_release: root.student_list()
+
+            MDSeparator:
+
+            MDLabel:
+                text: '[color=#89ABE3FF][b]List of Students[/b][/color]'
+                markup: True
+                halign: 'center'
+
+
+        MDCard:
+            orientation: 'vertical'
+            size_hint: .3, .25
+            radius: [36,]
+            border_radius: 30
+            pos: 210, 150
+            padding: dp(13)
+            MDIconButton:
+                icon: 'assets/edit_acct.png'
+                user_font_size: '64sp'
+                pos_hint: {'center_y': .6}
+                on_release: app.change_pass()
+
+            MDSeparator:
+
+            MDLabel:
+                text: '[color=#89ABE3FF][b]Change Password[/b][/color]'
+                markup: True
+                halign: 'center'
+
+<RegisterStudent>
+    name: 'register'
+    student_name: student_name
+    student_id: student_id
+    student_class: student_class
+
+
+    FloatLayout:
+        FitImage:
+            source: 'assets/RegisterStudent.png'
+
+        MDIconButton:
+            icon: 'arrow-left'
+            user_font_size: '64sp'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_x': .1, 'center_y': .95}
+            on_release: root.back()
+
+        MDTextField:
+            id: student_name
+            hint_text: 'Name'
+            current_hint_text_color: 1, 1, 1, 1
+            size_hint: .6, .1
+            multiline: False
+            write_tab: False
+            line_color_normal: 1, 1, 1, 1
+            color_mode: 'custom'
+            line_color_focus: 1, 1, 1, 1
+            pos_hint: {'center_x': .53, 'center_y': .4}
+
+        MDTextField:
+            id: student_id
+            hint_text: 'Identification Number'
+            current_hint_text_color: 1, 1, 1, 1
+            size_hint: .6, .1
+            multiline: False
+            write_tab: False
+            line_color_normal: 1, 1, 1, 1
+            color_mode: 'custom'
+            line_color_focus: 1, 1, 1, 1
+            pos_hint: {'center_x': .53, 'center_y': .3}
+
+        MDTextField:
+            id: student_class
+            hint_text: 'Class'
+            current_hint_text_color: 1, 1, 1, 1
+            size_hint: .6, .1
+            multiline: False
+            write_tab: False
+            line_color_normal: 1, 1, 1, 1
+            color_mode: 'custom'
+            line_color_focus: 1, 1, 1, 1
+            pos_hint: {'center_x': .53, 'center_y': .2}
+
+        MDFillRoundFlatIconButton:
+            icon: 'camera-iris'
+            theme_text_color: 'Custom'
+            text_color:  0.53333, 0.67058, 0.89019, 1
+            md_bg_color: 1, 1, 1, 1
+            text: '[color=#89ABE3FF][b]          Capture & Save[/b][/color]'
+            markup: True
+            theme_text_color: 'Custom'
+            size_hint: .6, None
+            #opacity: .8
+            pos_hint: {'center_x': .52, 'center_y': .1}
+            on_release: root.save()
+
+<WIDGETS>
+    text: root.text
+    secondary_text: root.secondary_text
+
+    IconLeftSampleWidget:
+        icon: root.icon
+
+
+<StudentList>
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            title: 'List of Students'
+            specific_text_color: 1, 1, 1, 1
+            md_bg_color:  0.53333, 0.67058, 0.89019, 1
+            elevation: 3
+            left_action_items: [['arrow-left', lambda x: root.back_list()]]
+
+        MDScrollViewRefreshLayout:
+            id: refresh_layout
+            refresh_callback: root.refresh_callback
+            root_layout: root
+
+            MDGridLayout:
+                id: content
+                adaptive_height: True
+                cols: 1
+
+<StudentInfo>
+    size_hint: .99, .99
+    auto_dismiss: False
+    background: 'assets/studentinfo.png'
+
+    FloatLayout:
+        Image:
+            source: root.image_name
+            size_hint: .3, .25
+            pos_hint: {'center_x': .5, 'center_y': .76}
+
+        MDIconButton:
+            icon: 'close-circle'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            user_font_size: '30sp'
+            pos_hint: {'center_x': .83, 'center_y': .73}
+            on_release: root.dismiss()
+
+        MDLabel:
+            text: str(root.name_student)
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            font_name: 'fonts/ROCK.ttf'
+            font_size: '25sp'
+            halign: 'center'
+            pos_hint: {'center_y': .6}
+
+
+        MDLabel:
+            text: '[b]Student Number:[/b]'
+            markup: True
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_x': .63, 'center_y': .35}
+
+
+        MDLabel:
+            text: str(root.id_student)
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_x': .99, 'center_y': .35}
+
+        MDLabel:
+            text: '[b]Class :[/b]'
+            markup: True
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_x': .63, 'center_y': .25}
+
+
+
+        MDLabel:
+            text: str(root.class_student)
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_x': .99, 'center_y': .25}
+
+        MDLabel:
+            text: '[b]Status:[/b]'
+            markup: True
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_x': .63, 'center_y': .3}
+
+
+        MDLabel:
+            text: root.status
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_x': .99, 'center_y': .3}
+
+        StackLayout:
+
+            spacing: dp(45)
+            pos_hint: {'center_x': .77, 'center_y':.02}
+
+            MDIconButton:
+                icon: 'assets/delete.png'
+                user_font_size: '5sp'
+                on_release:
+                    root.delete_student()
+                    root.refresh_list()
+                    root.dismiss()
+
+            MDIconButton:
+                icon: 'assets/edit_info.png'
+                user_font_size: '5sp'
+                on_release:
+                    root.edit_student()
+                    root.dismiss()
+
+            MDIconButton:
+                icon: 'assets/viewlog.png'
+                user_font_size: '20sp'
+                on_release:
+                    root.view_log()
+                    root.dismiss()
+
+
+<EditStudent>
+    name: 'edit'
+    size_hint: .99, .99
+    auto_dismiss: False
+    background: 'assets/editinfo.png'
+
+    FloatLayout:
+        Image:
+            source: root.image_name
+            size_hint: .3, .25
+            pos_hint: {'center_x': .5, 'center_y': .76}
+
+        MDIconButton:
+            icon: 'close-circle'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            user_font_size: '30sp'
+            pos_hint: {'center_x': .83, 'center_y': .73}
+            on_release: root.dismiss()
+
+        MDLabel:
+            text: str(root.name_text)
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            font_name: 'fonts/ROCK.ttf'
+            font_size: '25sp'
+            halign: 'center'
+            pos_hint: {'center_y': .6}
+
+
+        StackLayout:
+            size_hint_y: None
+            height: self.minimum_width
+            spacing: dp(10)
+            pos_hint: {'center_x': .75, 'center_y':.13}
+
+            MDRectangleFlatButton:
+                text: '[color=#89ABE3FF][b] SAVE [/b][/color]'
+                markup: True
+                md_bg_color: 1, 1, 1, 1
+                on_release: root.save()
+
+            MDRectangleFlatButton:
+                text: '[color=#FFFFFF][b]Cancel[/b][/color]'
+                markup: True
+                text_color: 1, 1, 1, 1
+                on_release: root.dismiss()
+
+
+<StudentLog>
+    id: logs
+    background: 'assets/white_bg.png'
+    FloatLayout:
+        BoxLayout:
+            pos_hint: {'top_x': 0, 'top_y': 0}
+            orientation: 'vertical'
+
+            MDToolbar:
+                title: root.name
+                specific_text_color: 1, 1, 1, 1
+                md_bg_color:  0.53333, 0.67058, 0.89019, 1
+                elevation: 3
+                left_action_items: [['arrow-left', lambda x: root.dismiss()]]
+            MDScrollViewRefreshLayout:
+                id: refresh_layout
+                refresh_callback: root.refresh_callback
+                root_layout: root
+                MDGridLayout:
+                    id: logs
+                    adaptive_height: True
+                    cols: 1
+
+<EditWindow>
+    name: 'edit'
+    user: user
+    password_1: password_1
+    password_2: password_2
+
+    FloatLayout:
+        FitImage:
+            source: 'assets/changepass.png'
+
+        MDTextField:
+            id: user
+            mode: 'rectangle'
+            hint_text: 'New username'
+            icon_right: 'account-lock-outline'
+            icon_right_color: 1, 1, 1, 1
+            current_hint_text_color: 1, 1, 1, 1
+            color_mode: 'custom'
+            line_color_focus: 1, 1, 1, 1
+            size_hint: .7, None
+            pos_hint: {'center_x': .5, 'center_y': .8}
+
+        MDTextField:
+            id: password_1
+            mode: 'rectangle'
+            hint_text: 'New Password'
+            icon_right: 'lock-open-outline'
+            icon_right_color: 1, 1, 1, 1
+            current_hint_text_color: 1, 1, 1, 1
+            color_mode: 'custom'
+            line_color_focus: 1, 1, 1, 1
+            size_hint: .7, None
+            pos_hint: {'center_x': .5, 'center_y': .65}
+
+
+        MDTextField:
+            id: password_2
+            mode: 'rectangle'
+            hint_text: 'Confirm Password'
+            password: True
+            icon_right: 'lock'
+            icon_right_color: 1, 1, 1, 1
+            current_hint_text_color: 1, 1, 1, 1
+            color_mode: 'custom'
+            line_color_normal: 1, 1, 1, 1
+            line_color_focus: 1, 1, 1, 1
+            size_hint: .7, None
+            pos_hint: {'center_x': .5, 'center_y': .5}
+
+
+        MDFillRoundFlatButton:
+            text: '[color=#89ABE3FF][b]DONE[/b][/color]'
+            markup: True
+            size_hint: .6, None
+            md_bg_color:  1, 1 ,1 ,1
+            pos_hint: {'center_x': .5, 'center_y': .35}
+            on_release: root.setup()
+
+        MDIconButton:
+            icon: 'arrow-left'
+            user_font_size: '64sp'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_y': .95}
+            on_release:
+                root.go_to_lobby()
+
+<About>
+    name: 'about'
+
+    FloatLayout:
+        Image:
+            source: 'assets/about.png'
+            size_hint: 1, 1.1
+
+        MDLabel:
+            text: root.intro
+            markup: True
+            pos_hint: {'center_y': .68}
+
+        MDIconButton:
+            icon:'android'
+            pos_hint: {'center_x': .51, 'center_y': .47}
+            opacity: .005
+            user_font_size: '64sp'
+            on_release:
+                root.giovanni()
+
+        MDIconButton:
+            icon:'android'
+            pos_hint: {'center_x': .51, 'center_y': .21}
+            opacity: .005
+            user_font_size: '64sp'
+            on_release:
+                root.dave()
+
+        MDIconButton:
+            icon:'android'
+            pos_hint: {'center_x': .29, 'center_y': .35}
+            user_font_size: '64sp'
+            opacity: .005
+            on_release:
+                root.simon()
+
+        MDIconButton:
+            icon:'android'
+            pos_hint: {'center_x': .74, 'center_y': .35}
+            opacity: .005
+            user_font_size: '64sp'
+            on_release:
+                root.heron()
+
+
+<Giovanni>
+    size_hint: .9, .9
+    auto_dismiss: False
+    background: 'assets/giovanni new.png'
+
+    FloatLayout:
+        MDIconButton:
+            icon: 'close-circle'
+            user_font_size: '32sp'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_x': .94, 'center_y': .71}
+            on_release:
+                root.dismiss()
+
+        MDLabel:
+            text: '[color=#FFFFFF][b] GIOVANNI \n       DE VERA[/b][/color]'
+            markup: True
+            font_name: 'fonts/ROCK.ttf'
+            font_size: '30sp'
+            pos_hint: {'center_x': .5, 'center_y': .65}
+
+        StackLayout:
+            spacing: dp(60)
+            pos_hint: {'center_x': .63, 'center_y': .01}
+
+            MDIconButton:
+                icon: 'assets/fb.png'
+                user_font_size: '20sp'
+                on_release:
+                    root.contact_fb()
+
+            MDIconButton:
+                icon: 'assets/tg.png'
+                user_font_size: '20sp'
+                on_release:
+                    root.contact_tg()
+
+            MDIconButton:
+                icon: 'assets/gmail.png'
+                user_font_size: '24sp'
+                on_release:
+                    root.contact_gmail()
+
+        MDLabel:
+            text: '[color=#FFFFFF][b]BSCpE[/b][/color]'
+            font_style: 'H5'
+            markup: True
+            pos_hint: {'center_x': .9, 'center_y': .1}
+
+        MDIcon:
+            icon: 'cupcake'
+            user_font_size: '20sp'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_x': .7, 'center_y': .25}
+
+        MDLabel:
+            text: '[color=#FFFFFF][b]AGE: 21 yrs old\nBIRTHDAY: JAN. 14, 1999[/b][/color]'
+            markup: True
+            font_name: 'fonts/TCM.ttf'
+            pos_hint: {'center_x': .82, 'center_y': .25}
+
+<Dave>
+    size_hint: .9, .9
+    auto_dismiss: False
+    background: 'assets/dave new.png'
+
+    FloatLayout:
+
+        MDIconButton:
+            icon: 'close-circle'
+            user_font_size: '32sp'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_x': .94, 'center_y': .71}
+            on_release:
+                root.dismiss()
+
+        MDLabel:
+            text: '[color=#FFFFFF][b] DAVE \n      PRESBITERO[/b][/color]'
+            markup: True
+            font_name: 'fonts/ROCK.ttf'
+            font_size: '30sp'
+            pos_hint: {'center_x': .5, 'center_y': .65}
+
+        StackLayout:
+            spacing: dp(60)
+            pos_hint: {'center_x': .63, 'center_y': .01}
+
+            MDIconButton:
+                icon: 'assets/fb.png'
+                user_font_size: '20sp'
+                on_release:
+                    root.contact_fb()
+
+            MDIconButton:
+                icon: 'assets/tg.png'
+                user_font_size: '20sp'
+                on_release:
+                    root.contact_tg()
+
+            MDIconButton:
+                icon: 'assets/gmail.png'
+                user_font_size: '24sp'
+                on_release:
+                    root.contact_gmail()
+
+        MDLabel:
+            text: '[color=#FFFFFF][b]BSCpE[/b][/color]'
+            font_style: 'H5'
+            markup: True
+            pos_hint: {'center_x': .9, 'center_y': .1}
+
+        MDIcon:
+            icon: 'cupcake'
+            user_font_size: '20sp'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_x': .7, 'center_y': .25}
+
+        MDLabel:
+            text: '[color=#FFFFFF][b]AGE: 19 yrs old\nBIRTHDAY: SEPT. 04, 2000[/b][/color]'
+            markup: True
+            font_name: 'fonts/TCM.ttf'
+            pos_hint: {'center_x': .82, 'center_y': .25}
+
+<Simon>
+    size_hint: .9, .9
+    auto_dismiss: False
+    background: 'assets/simon new.png'
+
+    FloatLayout:
+        MDIconButton:
+            icon: 'close-circle'
+            user_font_size: '32sp'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_x': .94, 'center_y': .71}
+            on_release:
+                root.dismiss()
+
+        MDLabel:
+            text: '[color=#FFFFFF][b] CHRISTIAN \n     SIMON CRUZADA[/b][/color]'
+            markup: True
+            font_name: 'fonts/ROCK.ttf'
+            font_size: '30sp'
+            pos_hint: {'center_x': .5, 'center_y': .63}
+
+        StackLayout:
+            spacing: dp(60)
+            pos_hint: {'center_x': .63, 'center_y': .01}
+
+            MDIconButton:
+                icon: 'assets/fb.png'
+                user_font_size: '20sp'
+                on_release:
+                    root.contact_fb()
+
+            MDIconButton:
+                icon: 'assets/tg.png'
+                user_font_size: '20sp'
+                on_release:
+                    root.contact_tg()
+
+            MDIconButton:
+                icon: 'assets/gmail.png'
+                user_font_size: '24sp'
+                on_release:
+                    root.contact_gmail()
+
+        MDLabel:
+            text: '[color=#FFFFFF][b]BSCpE[/b][/color]'
+            font_style: 'H5'
+            markup: True
+            pos_hint: {'center_x': .9, 'center_y': .1}
+
+        MDIcon:
+            icon: 'cupcake'
+            user_font_size: '20sp'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_x': .7, 'center_y': .25}
+
+        MDLabel:
+            text: '[color=#FFFFFF][b]AGE: 19 yrs old\nBIRTHDAY: JUNE 06, 2001[/b][/color]'
+            markup: True
+            font_name: 'fonts/TCM.ttf'
+            pos_hint: {'center_x': .82, 'center_y': .25}
+
+<Heron>
+    size_hint: .9, .9
+    auto_dismiss: False
+    background: 'assets/heron new.png'
+
+    FloatLayout:
+        MDIconButton:
+            icon: 'close-circle'
+            user_font_size: '32sp'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_x': .94, 'center_y': .71}
+            on_release:
+                root.dismiss()
+
+        MDLabel:
+            text: '[color=#FFFFFF][b] JHON HERON\n     CARSOCHO[/b][/color]'
+            markup: True
+            font_name: 'fonts/ROCK.ttf'
+            font_size: '30sp'
+            pos_hint: {'center_x': .5, 'center_y': .63}
+
+        StackLayout:
+            spacing: dp(60)
+            pos_hint: {'center_x': .63, 'center_y': .01}
+
+            MDIconButton:
+                icon: 'assets/fb.png'
+                user_font_size: '20sp'
+                on_release:
+                    root.contact_fb()
+
+            MDIconButton:
+                icon: 'assets/tg.png'
+                user_font_size: '20sp'
+                on_release:
+                    root.contact_tg()
+
+            MDIconButton:
+                icon: 'assets/gmail.png'
+                user_font_size: '24sp'
+                on_release:
+                    root.contact_gmail()
+
+        MDLabel:
+            text: '[color=#FFFFFF][b]BSCpE[/b][/color]'
+            font_style: 'H5'
+            markup: True
+            pos_hint: {'center_x': .9, 'center_y': .1}
+
+        MDIcon:
+            icon: 'cupcake'
+            user_font_size: '20sp'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            pos_hint: {'center_x': .7, 'center_y': .25}
+
+        MDLabel:
+            text: '[color=#FFFFFF][b]AGE: 19 yrs old\nBIRTHDAY: MAY 19, 2001[/b][/color]'
+            markup: True
+            font_name: 'fonts/TCM.ttf'
+            pos_hint: {'center_x': .82, 'center_y': .25}
